@@ -1,0 +1,78 @@
+# Configuration file for Harbor
+
+# Harbor hostname configuration
+hostname: harbor.com
+http:
+  port: 5000
+  redirect_https: false
+
+# Authentication mode
+auth_mode: database
+
+# Database configuration
+database:
+  type: postgresql
+  password: your_database_password
+  max_idle_conns: 50
+  max_open_conns: 100
+  db_instance_max_conns: 0
+
+# Harbor administrator account
+harbor_admin_password: Argo77&$.
+
+# Email notifications
+email:
+  server: smtp.harbor.com
+  port: 25
+  username: prabiney
+  password: your_email_password
+  from: your_email@example.com
+  insecure: false
+
+# Storage settings
+data_volume: /data
+
+# Log configuration
+log:
+  level: info
+  local: /var/log/harbor
+
+# TLS configuration
+https:
+  port: 443
+  certificate: /path/to/ssl/certificate.pem
+  private_key: /path/to/ssl/private_key.pem
+
+# Uncomment and configure the following section if using an external database
+# external_database:
+#   host: external_db_host
+#   port: external_db_port
+#   db_name: external_db_name
+#   username: external_db_username
+#   password: external_db_password
+
+# Uncomment and configure the following section if using LDAP authentication
+# ldap_auth:
+#   ldap_url: ldap://ldap.example.com
+#   ldap_searchdn: ou=users,dc=example,dc=com
+#   ldap_search_password: your_ldap_password
+#   ldap_base_dn: dc=example,dc=com
+#   ldap_filter: (&(objectClass=person)(uid=%s))
+#   ldap_uid: uid
+#   ldap_scope: 3
+#   ldap_timeout: 5
+
+# Uncomment and configure the following section if using OIDC authentication
+# oidc_auth:
+#   oidc_endpoint: https://your_oidc_provider.com
+#   oidc_client_id: your_oidc_client_id
+#   oidc_client_secret: your_oidc_client_secret
+#   oidc_redirect_uri: https://example.com/call_back
+
+# Uncomment and configure the following section if using UAA authentication
+# uaa_auth:
+#   uaa_endpoint: https://your_uaa_provider.com
+#   uaa_client_id: your_uaa_client_id
+#   uaa_client_secret: your_uaa_client_secret
+#   uaa_verify_cert: true
+#   uaa_ca_cert: /path/to/ca/certificate.pem

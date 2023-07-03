@@ -1,0 +1,72 @@
+Ref: https://goharbor.io/docs/2.8.0/
+
+install-config/configure-https/
+
+
+Generate a Certificate Authority Certificate
+openssl genrsa -out ca.key 4096
+openssl req -x509 -new -nodes -sha512 -days 3650 \
+ -subj "/C=CN/ST=Beijing/L=Beijing/O=example/OU=Personal/CN=prabin.com" \
+ -key ca.key \
+ -out ca.crt
+
+
+ 
+
+
+Generate a Server Certificate
+ openssl genrsa -out prabin.com.key 4096
+ openssl req -sha512 -new \
+    -subj "/C=CN/ST=Beijing/L=Beijing/O=example/OU=Personal/CN=yourdomain.com" \
+    -key prabin.com.key \
+    -out prabin.com.csr
+
+
+cat > v3.ext <<-EOF
+authorityKeyIdentifier=keyid,issuer
+basicConstraints=CA:FALSE
+keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
+extendedKeyUsage = serverAuth
+subjectAltName = IP:192.168.232.115,
+
+[alt_names]
+DNS.1=prabin.com
+DNS.2=prabin
+DNS.3=prabin.com
+EOF
+
+
+cat > v3.ext <<-EOF
+authorityKeyIdentifier=keyid,issuer
+basicConstraints=CA:FALSE
+keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
+extendedKeyUsage = serverAuth
+subjectAltName = IP:192.168.232.115,
+
+[alt_names]
+DNS.1=prabin.com
+DNS.2=prabin
+DNS.3=prabin.com
+EOF
+
+
+openssl x509 -req -sha512 -days 3650 \
+    -extfile v3.ext \
+    -CA ca.crt -CAkey ca.key -CAcreateserial \
+    -in prabin.com.csr \
+    -out prabin.com.crt
+
+    openssl x509 -req -sha512 -days 3650 \
+    -extfile v3.ext \
+    -CA ca.crt -CAkey ca.key -CAcreateserial \
+    -in prabin.com.csr \
+    -out prabin.com.crt
+
+
+
+cp prabin.com.crt /data/cert/
+cp prabin.com.key /data/cert/
+
+
+Note: Ignore using https in harbor.yml
+
