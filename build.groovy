@@ -61,11 +61,11 @@ pipeline {
         dockerTool 'Docker_latest'
     }
     environment {
-	    GIT_URL = "https://github.com/prabinay/simple-java-maven-app.git"
-	    GIT_BRANCH = "master"
-	    SONAR_PROJECT_KEY = "Java-maven-app"
-	    SONAR_PROJECT_NAME = "Java-maven-app"
-	    SONAR_USER_TOKEN = "squ_b07cd315932c6cfafa7e0a7aa87b1528a98ada2a"
+	    GIT_URL = "" //add git url
+	    GIT_BRANCH = "master"  //add git branch name
+	    SONAR_PROJECT_KEY = "" //add project key
+	    SONAR_PROJECT_NAME = ""  //add project folder name
+	    SONAR_USER_TOKEN = "" //add user token
 	}
 	stages {
 		stage('Git Clone') {
